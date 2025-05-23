@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>0U Trip Planner</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 2rem; background: #f9f9f9; }
+    .container { max-width: 800px; margin: auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h1 { color: #333; }
+    ul { padding-left: 1.2rem; }
+    li { margin-bottom: 0.5rem; }
+    a { color: #007bff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back-link { display: block; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>0U Trip Planner</h1>
+    <p><strong>기술 스택:</strong> Node.js, Express, MySQL, React.js, Kakao API</p>
+
+    <h2>프로젝트 개요</h2>
+    <p>여행 계획을 작성하고 유저들끼리 공유할 수 있는 웹 플랫폼입니다. 프론트엔드는 React로 구현하고, 백엔드는 Node.js와 Express를 기반으로 RESTful API를 설계하였습니다.</p>
+
+    <h2>주요 기능</h2>
+    <ul>
+      <li>사용자 회원가입 및 로그인 (세션 기반)</li>
+      <li>여행 계획 생성, 조회, 수정, 삭제</li>
+      <li>Kakao 소셜 로그인 및 지도 기반 장소 검색</li>
+      <li>CORS 설정을 통한 프론트 연동 보안 처리</li>
+      <li>Android Studio를 통해 모바일 버전도 연동</li>
+    </ul>
+
+    <h2>기술적 도전 및 해결</h2>
+    <ul>
+      <li>async/await을 활용한 비동기 처리 안정화</li>
+      <li>쿠키 + 세션 미들웨어로 보안성 있는 인증 구현</li>
+      <li>데이터베이스 설계 및 ERD 구성, 여행 일정 테이블 구조화</li>
+      <li>클라이언트/서버 간 CORS 정책 대응</li>
+    </ul>
+
+    <h2>링크</h2>
+    <p><a href="https://github.com/JamongFriend/0UTripPlanner" target="_blank">GitHub 저장소 바로가기</a></p>
+
+    <a class="back-link" href="/">← 메인 페이지로 돌아가기</a>
+  </div>
+</body>
+</html>

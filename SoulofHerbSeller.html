@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soul of Herb Seller - 상세 페이지</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 2rem; background: #f9f9f9; }
+    .container { max-width: 800px; margin: auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h1 { color: #333; }
+    ul { padding-left: 1.2rem; }
+    li { margin-bottom: 0.5rem; }
+    a { color: #007bff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back-link { display: block; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Soul of Herb Seller</h1>
+    <p><strong>기술 스택:</strong> Unreal Engine 5, Blueprint</p>
+
+    <h2>프로젝트 개요</h2>
+    <p>식물을 채집하고 보스 몬스터를 사냥하는 액션 어드벤처 게임으로, 블루프린트를 활용하여 게임 로직을 설계하고 구현하였습니다.</p>
+
+    <h2>주요 기능</h2>
+    <ul>
+      <li>미니게임 기반의 식물 채집 시스템 구현</li>
+      <li>보스 몬스터 등장 및 전투 시스템 설계</li>
+      <li>상태 저장, 카메라 무빙, HUD 연동</li>
+      <li>키보드 입력 기반 인벤토리 토글 UI 시스템 구현</li>
+    </ul>
+
+    <h2>객체지향 설계 요소</h2>
+    <ul>
+      <li>플레이어 캐릭터와 몬스터 간 상호작용 설계</li>
+      <li>이벤트 중심의 상태 전이와 게임 흐름 구성</li>
+      <li>BP_Player / BP_QD_Player 구성 간 Pawn 관리 이슈 해결</li>
+    </ul>
+
+    <h2>기술적 도전 및 해결</h2>
+    <ul>
+      <li>맵 전환 시 상태 유지 문제 해결 (세이브/로드 적용)</li>
+      <li>이벤트 BeginPlay 시 중복 실행 문제 디버깅</li>
+      <li>미니게임 성공 후 초기 위치로 되돌아가는 이슈 해결</li>
+    </ul>
+
+    <a class="back-link" href="/">← 메인 페이지로 돌아가기</a>
+  </div>
+</body>
+</html>

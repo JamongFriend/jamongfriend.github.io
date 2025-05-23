@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management System</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 2rem; background: #f9f9f9; }
+    .container { max-width: 800px; margin: auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h1 { color: #333; }
+    ul { padding-left: 1.2rem; }
+    li { margin-bottom: 0.5rem; }
+    a { color: #007bff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back-link { display: block; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Library Management System</h1>
+    <p><strong>기술 스택:</strong> Java, Spring Boot, JPA, MySQL</p>
+
+    <h2>프로젝트 개요</h2>
+    <p>도서의 등록, 대여, 반납, 예약 등 전체 도서 관리 프로세스를 처리하는 백엔드 시스템입니다. Spring Boot와 JPA를 활용하여 도메인 중심의 설계와 CRUD API를 구현하였습니다.</p>
+
+    <h2>주요 기능</h2>
+    <ul>
+      <li>도서 등록, 수정, 삭제 API</li>
+      <li>회원 관리 및 도서 대여/반납 로직 구현</li>
+      <li>예약 우선 처리 및 대여 기간 자동 감소 기능</li>
+      <li>도서 재고 관리 및 반납 시 자동 복원</li>
+      <li>국립중앙도서관 OpenAPI 연동하여 도서 데이터 수집</li>
+    </ul>
+
+    <h2>기술적 도전 및 해결</h2>
+    <ul>
+      <li>@OneToMany 등 양방향 연관관계 설정 및 무한루프 해결 (@JsonIgnore)</li>
+      <li>Fetch Join으로 N+1 문제 해결 및 쿼리 최적화</li>
+      <li>DTO 설계를 통한 API 응답 데이터 최적화</li>
+      <li>Spring MVC 계층 아키텍처와 생성자 주입 기반 설계 구조 적용</li>
+    </ul>
+
+    <h2>링크</h2>
+    <p><a href="https://github.com/JamongFriend/libraryManagement" target="_blank">GitHub 저장소 바로가기</a></p>
+
+    <a class="back-link" href="/">← 메인 페이지로 돌아가기</a>
+  </div>
+</body>
+</html>
