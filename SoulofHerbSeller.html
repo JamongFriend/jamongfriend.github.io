@@ -6,43 +6,101 @@
   <title>Soul of Herb Seller - 상세 페이지</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 2rem; background: #f9f9f9; }
-    .container { max-width: 800px; margin: auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    h1 { color: #333; }
+    .container { max-width: 980px; margin: auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h1 { color: #333; margin-top: 0; }
     ul { padding-left: 1.2rem; }
-    li { margin-bottom: 0.5rem; }
+    li { margin-bottom: 0.7rem; }
     a { color: #007bff; text-decoration: none; }
     a:hover { text-decoration: underline; }
     .back-link { display: block; margin-top: 2rem; }
+    .code { font-family: Consolas, monospace; background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+
+    /* 갤러리 */
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin: 1rem 0 2rem; }
+    .thumb { position: relative; padding-top: 62%; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.08); cursor: zoom-in; background: #eee; }
+    .thumb img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    /* 라이트박스 */
+    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 9999; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+    .lightbox .close { position: absolute; top: 20px; right: 24px; font-size: 28px; color: #fff; cursor: pointer; }
+
+    .caption { color: #666; font-size: 0.92rem; margin-top: 0.5rem; }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Soul of Herb Seller</h1>
-    <p><strong>기술 스택:</strong> Unreal Engine 5, Blueprint</p>
+    <p><strong>기술 스택</strong>: Unreal Engine 5, Blueprint</p>
 
     <h2>프로젝트 개요</h2>
-    <p>식물을 채집하고 보스 몬스터를 사냥하는 액션 어드벤처 게임으로, 블루프린트를 활용하여 게임 로직을 설계하고 구현하였습니다.</p>
+    <p>
+      <strong>Soul of Herb Seller</strong>는 식물을 채집하고, 수집한 재료로 캐릭터를 강화하며 보스 몬스터를 처치하는
+      <em>3D 액션 어드벤처 게임</em>입니다.
+      Unreal Engine 5의 <strong>Blueprint</strong>를 활용하여 이벤트 중심 게임 로직과 캐릭터 상호작용을 구현했습니다.
+      데이터 흐름과 상태 전이를 객체 단위로 관리하며, 유지보수가 용이한 구조로 설계했습니다.
+    </p>
 
     <h2>주요 기능</h2>
     <ul>
-      <li>미니게임 기반의 식물 채집 시스템 구현</li>
-      <li>보스 몬스터 등장 및 전투 시스템 설계</li>
-      <li>상태 저장, 카메라 무빙, HUD 연동</li>
-      <li>키보드 입력 기반 인벤토리 토글 UI 시스템 구현</li>
+      <li><strong>식물 채집 시스템</strong>:
+        미니게임 형태로 구현된 채집 로직 – 일정 시간 내 입력 성공 시 아이템 획득</li>
+      <li><strong>보스 몬스터 전투</strong>:
+        보스 AI와의 전투 패턴 설계 (공격, 회피, 피격 상태 전이)</li>
+      <li><strong>상태 관리</strong>:
+        체력, 버프, 채집 성공률 등 <em>플레이어 상태 변수</em>를 중앙 관리</li>
+      <li><strong>카메라 & HUD 시스템</strong>:
+        전투/탐색 모드에 따른 카메라 시점 전환, HUD 상태 실시간 반영</li>
+      <li><strong>인벤토리 UI</strong>:
+        키보드 입력(<span class="code">Tab</span>) 기반 인벤토리 토글 및 아이템 표시</li>
     </ul>
 
     <h2>객체지향 설계 요소</h2>
     <ul>
-      <li>플레이어 캐릭터와 몬스터 간 상호작용 설계</li>
-      <li>이벤트 중심의 상태 전이와 게임 흐름 구성</li>
-      <li>BP_Player / BP_QD_Player 구성 간 Pawn 관리 이슈 해결</li>
+      <li><strong>클래스 기반 구조</strong>:
+        <span class="code">BP_Player</span>, <span class="code">BP_Monster</span>, <span class="code">BP_Item</span> 등
+        엔티티별 BluePrint 클래스로 역할 분리</li>
+      <li><strong>상호작용 인터페이스</strong>:
+        플레이어 ↔ 몬스터 ↔ 오브젝트 간 이벤트 기반 상호작용 (<span class="code">OnOverlap</span>, <span class="code">Event Dispatch</span>)</li>
+      <li><strong>상태 전이 관리</strong>:
+        <em>Idle → Gathering → Combat → Dead</em> 등 상태머신 기반의 전이 구조 구현</li>
+      <li><strong>Pawn 관리 개선</strong>:
+        <span class="code">BP_Player</span>와 <span class="code">BP_QD_Player</span> 간 Pawn 충돌 문제 해결 및 입력 포커스 정상화</li>
     </ul>
 
-    <h2>기술적 도전 및 해결</h2>
+    <h2>트러블슈팅 & 문제 해결</h2>
     <ul>
-      <li>맵 전환 시 상태 유지 문제 해결 (세이브/로드 적용)</li>
-      <li>이벤트 BeginPlay 시 중복 실행 문제 디버깅</li>
-      <li>미니게임 성공 후 초기 위치로 되돌아가는 이슈 해결</li>
+      <li><strong>맵 전환 시 상태 유지 문제</strong>:
+        맵 이동 시 변수 초기화 문제 발생 → <span class="code">SaveGame</span> 시스템 도입으로 플레이어 데이터 유지</li>
+      <li><strong>중복 이벤트 실행</strong>:
+        <span class="code">BeginPlay</span> 중복 호출로 캐릭터 초기화 오류 발생 → 로직 분리 및 조건 체크로 해결</li>
+      <li><strong>위치 리셋 버그</strong>:
+        미니게임 종료 후 플레이어 위치가 원점으로 이동 → <span class="code">GetActorLocation()</span> 백업 및 복원 로직 추가</li>
+      <li><strong>AI 타겟팅 오류</strong>:
+        보스 AI의 <span class="code">TargetActor</span> 참조 끊김 문제 → <em>Behavior Tree BlackBoard</em> 재설정으로 안정화</li>
+    </ul>
+
+    <h2>플레이 화면 스크린샷</h2>
+    <div class="gallery" id="gallery">
+      <!-- 썸네일 예시: 이미지 파일만 교체하세요 -->
+      <div class="thumb"><img src="images/shot-01.png" alt="월드 탐색 화면"/></div>
+      <div class="thumb"><img src="images/shot-02.png" alt="채집 미니게임 UI"/></div>
+      <div class="thumb"><img src="images/shot-03.png" alt="보스 전투 장면"/></div>
+      <div class="thumb"><img src="images/shot-04.png" alt="인벤토리 & HUD"/></div>
+    </div>
+    <p class="caption">※ 폴더 <span class="code">/images</span> 에 실제 스크린샷을 넣고 파일명만 맞춰주세요.</p>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <span class="close" id="closeBtn" aria-label="Close">×</span>
+      <img id="lightboxImg" alt="expanded screenshot"/>
+    </div>
+
+    <h2>이미지 출처</h2>
+    <ul>
+      <li><strong>캐릭터 에셋</strong>: <a href="https://anokolisa.itch.io/sidescroller-pixelart-sprites-asset-pack-forest-16x16">Legacy Fantasy Frr-pixel Art Asset</li>
+      <li><strong>배경 에셋</strong>: <a href="https://anokolisa.itch.io/sidescroller-pixelart-sprites-asset-pack-forest-16x16">Legacy Fantasy Frr-pixel Art Asset</li>
+      <li><strong>보스 몬스터 에셋</strong>: 직접 제작</li>
     </ul>
 
     <h2>링크</h2>
@@ -50,5 +108,30 @@
 
     <a class="back-link" href="/">← 메인 페이지로 돌아가기</a>
   </div>
+  <script>
+    // 라이트박스
+    const gallery = document.getElementById('gallery');
+    const lightbox = document.createElement('div');
+    const img = document.createElement('img');
+    const close = document.createElement('span');
+
+    lightbox.className = 'lightbox';
+    close.className = 'close';
+    close.textContent = '×';
+    lightbox.appendChild(img);
+    lightbox.appendChild(close);
+    document.body.appendChild(lightbox);
+
+    gallery.addEventListener('click', e => {
+      const target = e.target.closest('img');
+      if (!target) return;
+      img.src = target.src;
+      lightbox.classList.add('open');
+    });
+
+    close.addEventListener('click', () => lightbox.classList.remove('open'));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+    document.addEventListener('keyup', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
+  </script>
 </body>
 </html>

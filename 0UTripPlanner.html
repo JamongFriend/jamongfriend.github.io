@@ -21,23 +21,71 @@
     <p><strong>기술 스택:</strong> Node.js, Express, MySQL, React.js, Kakao API</p>
 
     <h2>프로젝트 개요</h2>
-    <p>여행 계획을 작성하고 유저들끼리 공유할 수 있는 웹 플랫폼입니다. 프론트엔드는 React로 구현하고, 백엔드는 Node.js와 Express를 기반으로 RESTful API를 설계하였습니다.</p>
+    <p><strong>0U Trip Planner</strong>는 여행 일정을 작성하고 공유할 수 있는 웹 플랫폼입니다.
+      백엔드는 Node.js와 Express로 RESTful API를 설계하였으며,
+      프론트엔드는 React와 Android Studio 환경에서 동일한 API를 활용해 구현했습니다.
+      사용자 인증, 여행 일정 CRUD, 지도 기반 장소 검색 등 실제 서비스 흐름을 고려한 구조로 개발했습니다.</p>
 
     <h2>주요 기능</h2>
     <ul>
-      <li>사용자 회원가입 및 로그인 (세션 기반)</li>
-      <li>여행 계획 생성, 조회, 수정, 삭제</li>
-      <li>Kakao 소셜 로그인 및 지도 기반 장소 검색</li>
-      <li>CORS 설정을 통한 프론트 연동 보안 처리</li>
-      <li>Android Studio를 통해 모바일 버전도 연동</li>
+      <li><strong>회원가입 및 로그인</strong>:
+        <span class="code">/api/auth/login</span>, <span class="code">/api/auth/signup</span>
+        쿠키 + 세션 기반 인증, 비밀번호 해싱 처리(<span class="code">bcrypt</span>)</li>
+      <li><strong>여행 계획 CRUD</strong>:
+        <span class="code">/api/trips</span>
+        여행 일정 생성, 조회, 수정, 삭제 기능 (비동기 처리 <span class="code">async/await</span> 기반)</li>
+      <li><strong>지도 기반 장소 검색</strong>:
+        <span class="code">Kakao Map API</span> 연동 → 여행지 좌표 및 장소 정보 실시간 표시</li>
+      <li><strong>소셜 로그인</strong>:
+        <span class="code">Kakao Login API</span>으로 간편 로그인 및 사용자 프로필 연동</li>
+      <li><strong>클라이언트 연동</strong>:
+        React 및 Android 앱 모두 <em>동일 REST API</em>를 호출하여 데이터 일관성 확보</li>
+      <li><strong>CORS 보안 처리</strong>:
+        Express 미들웨어에서 <span class="code">cors()</span> 설정으로 교차 출처 요청 허용</li>
+      <li><strong>데이터베이스 설계</strong>:
+        MySQL 기반 <em>User, Trip, Plan, Place</em> 테이블 구조화 및 관계 설정 (1:N, N:M)</li>
     </ul>
 
-    <h2>기술적 도전 및 해결</h2>
+    <h2>아키텍처 & 설계 포인트</h2>
     <ul>
-      <li>async/await을 활용한 비동기 처리 안정화</li>
-      <li>쿠키 + 세션 미들웨어로 보안성 있는 인증 구현</li>
-      <li>데이터베이스 설계 및 ERD 구성, 여행 일정 테이블 구조화</li>
-      <li>클라이언트/서버 간 CORS 정책 대응</li>
+      <li><strong>3계층 구조</strong>:
+        <em>Router → Service → Repository</em> 계층 분리로 모듈화 및 유지보수성 확보</li>
+      <li><strong>RESTful 설계 원칙</strong>:
+        HTTP 메서드별(POST/GET/PUT/DELETE) 명확한 역할 정의</li>
+      <li><strong>세션 관리</strong>:
+        <span class="code">express-session</span>과 <span class="code">cookie-parser</span>를 이용한 세션 유지 및 만료 처리</li>
+      <li><strong>비동기 제어</strong>:
+        <span class="code">async/await</span> + <span class="code">try/catch</span> 기반 오류 처리로 비동기 흐름 안정화</li>
+      <li><strong>공통 미들웨어 관리</strong>:
+        인증, 로깅, CORS, 에러 핸들링을 <span class="code">app.use()</span> 레벨에서 중앙 관리</li>
+      <li><strong>확장성 고려</strong>:
+        향후 일정 공유 기능 추가 시에도 기존 API 구조 수정 없이 확장 가능하도록 설계</li>
+    </ul>
+
+    <h2>주요 시나리오</h2>
+    <ul>
+      <li><strong>회원가입 → 로그인</strong>:
+        사용자는 이메일/비밀번호 입력 → <em>세션 생성</em> 후 메인 페이지 이동</li>
+      <li><strong>여행 일정 등록</strong>:
+        사용자가 여행 이름, 날짜, 장소 입력 → <em>MySQL Trip 테이블 저장</em></li>
+      <li><strong>지도 검색</strong>:
+        Kakao Map API를 통해 장소 검색 후 좌표 기반 <em>마커 표시</em></li>
+      <li><strong>계획 수정/삭제</strong>:
+        본인 소유 일정만 접근 가능하도록 <em>세션 사용자 ID 검증</em></li>
+      <li><strong>Android 연동</strong>:
+        동일 REST API를 모바일 클라이언트에서 호출하여 웹과 데이터 공유</li>
+    </ul>
+
+    <h2>트러블슈팅 & 문제 해결</h2>
+    <ul>
+      <li><strong>비동기 제어 혼선</strong>:
+        Promise 체인 중첩 → <em>async/await</em> 리팩토링으로 흐름 단순화</li>
+      <li><strong>CORS 정책 충돌</strong>:
+        프론트·모바일 연동 시 교차 출처 에러 → <em>CORS 미들웨어</em> 설정으로 해결</li>
+      <li><strong>세션 만료 이슈</strong>:
+        <em>cookie-parser</em>와 <em>express-session</em> 설정 분리 → 세션 지속성 정상화</li>
+      <li><strong>데이터 무결성</strong>:
+        외래키 제약조건 적용 → 일정 삭제 시 연관 데이터 자동 삭제</li>
     </ul>
 
     <h2>링크</h2>
