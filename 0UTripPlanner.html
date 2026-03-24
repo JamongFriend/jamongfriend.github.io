@@ -3,93 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>0U Trip Planner</title>
+  <title>0U Trip Planner - Portfolio</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 2rem; background: #f9f9f9; }
-    .container { max-width: 800px; margin: auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    h1 { color: #333; }
-    ul { padding-left: 1.2rem; }
-    li { margin-bottom: 0.5rem; }
-    a { color: #007bff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .back-link { display: block; margin-top: 2rem; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 2rem; background: #f4f7f6; color: #333; line-height: 1.6; }
+    .container { max-width: 900px; margin: auto; background: white; padding: 3rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+    h1 { color: #BB86FC; border-bottom: 2px solid #BB86FC; padding-bottom: 1rem; margin-bottom: 2rem; }
+    h2 { color: #555; margin-top: 2.5rem; border-left: 5px solid #BB86FC; padding-left: 1rem; }
+    .tech-stack { background: #eee; padding: 1rem; border-radius: 8px; font-weight: bold; margin-bottom: 20px; }
+    ul { padding-left: 1.5rem; list-style-type: disc; }
+    li { margin-bottom: 0.8rem; }
+    .code { background: #f0f0f0; padding: 0.2rem 0.4rem; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.9em; color: #e03131; }
+    
+    /* 📸 이미지 스타일링 */
+    .portfolio-img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 1.5rem 0;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        border: 1px solid #eee;
+    }
+    
+    .trouble-section { background: #fff1f1; padding: 1.5rem; border-radius: 8px; border-left: 5px solid #e03131; }
+    a { color: #BB86FC; text-decoration: none; font-weight: bold; }
+    .back-link { display: inline-block; margin-top: 3rem; padding: 0.5rem 1rem; background: #eee; border-radius: 5px; color: #333; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>0U Trip Planner</h1>
-    <p><strong>기술 스택:</strong> Node.js, Express, MySQL, React.js, Kakao API</p>
+    <h1>0U Trip Planner (Full-stack 여행 플랫폼)</h1>
+    <p class="tech-stack">⚙️ Tech: Node.js, Express, MySQL (Sequelize), React.js, Kakao Maps API, Passport.js</p>
 
     <h2>프로젝트 개요</h2>
-    <p><strong>0U Trip Planner</strong>는 여행 일정을 작성하고 공유할 수 있는 웹 플랫폼입니다.
-      백엔드는 Node.js와 Express로 RESTful API를 설계하였으며,
-      프론트엔드는 React와 Android Studio 환경에서 동일한 API를 활용해 구현했습니다.
-      사용자 인증, 여행 일정 CRUD, 지도 기반 장소 검색 등 실제 서비스 흐름을 고려한 구조로 개발했습니다.</p>
+    <p><strong>0U Trip Planner</strong>는 나만의 여행 일정을 상세히 기록하고, 타인과 공유하며 소통할 수 있는 풀스택 웹 서비스입니다. 
+      단순한 정보 기록을 넘어 <strong>공유(Share) 및 가져오기(Import)</strong> 로직을 통해 사용자 간 인터랙션을 극대화했으며, 
+      Kakao Map API를 깊이 있게 커스터마이징하여 실시간 장소 검색 및 시각화 기능을 구현했습니다.</p>
+    <img src="images/main_screen.png" alt="메인 화면" class="portfolio-img">
 
-    <h2>주요 기능</h2>
+    <h2>주요 기능 (Key Features)</h2>
     <ul>
-      <li><strong>회원가입 및 로그인</strong>:
-        <span class="code">/api/auth/login</span>, <span class="code">/api/auth/signup</span>
-        쿠키 + 세션 기반 인증, 비밀번호 해싱 처리(<span class="code">bcrypt</span>)</li>
-      <li><strong>여행 계획 CRUD</strong>:
-        <span class="code">/api/trips</span>
-        여행 일정 생성, 조회, 수정, 삭제 기능 (비동기 처리 <span class="code">async/await</span> 기반)</li>
-      <li><strong>지도 기반 장소 검색</strong>:
-        <span class="code">Kakao Map API</span> 연동 → 여행지 좌표 및 장소 정보 실시간 표시</li>
-      <li><strong>소셜 로그인</strong>:
-        <span class="code">Kakao Login API</span>으로 간편 로그인 및 사용자 프로필 연동</li>
-      <li><strong>클라이언트 연동</strong>:
-        React 및 Android 앱 모두 <em>동일 REST API</em>를 호출하여 데이터 일관성 확보</li>
-      <li><strong>CORS 보안 처리</strong>:
-        Express 미들웨어에서 <span class="code">cors()</span> 설정으로 교차 출처 요청 허용</li>
-      <li><strong>데이터베이스 설계</strong>:
-        MySQL 기반 <em>User, Trip, Plan, Place</em> 테이블 구조화 및 관계 설정 (1:N, N:M)</li>
+      <li><strong>스마트 플래너 CRUD & 상태 관리</strong>:
+        숙소, 인원, 목적 등 상세 데이터 처리 및 <span class="code">isMarked</span>, <span class="code">isShared</span> 플래그를 활용한 동적 상태 제어.
+        <img src="images/plan_create.png" alt="플래너 생성 화면" class="portfolio-img">
+        <img src="images/plan_list.png" alt="내 플래너 목록 화면" class="portfolio-img">
+      </li>
+      
+      <li><strong>위치 기반 서비스 (LBS)</strong>:
+        키워드 검색 및 연관 검색어 리스트 제공. 클릭 시 <span class="code">panTo</span>를 활용한 부드러운 이동과 커스텀 마커/인포윈도우 렌더링.
+        <img src="images/map_interaction.png" alt="지도 인터랙션 화면" class="portfolio-img">
+      </li>
+
+      <li><strong>소셜 공유 및 데이터 연동</strong>:
+        공개 게시판 구현 및 좋아요 시스템. Sequelize <strong>Include(Join)</strong>를 활용해 작성자 정보를 효율적으로 렌더링.
+        <img src="images/plan_share.png" alt="플래너 공유 게시판" class="portfolio-img">
+        <img src="images/plan_detail.png" alt="플래너 상세보기" class="portfolio-img">
+      </li>
     </ul>
 
-    <h2>아키텍처 & 설계 포인트</h2>
-    <ul>
-      <li><strong>3계층 구조</strong>:
-        <em>Router → Service → Repository</em> 계층 분리로 모듈화 및 유지보수성 확보</li>
-      <li><strong>RESTful 설계 원칙</strong>:
-        HTTP 메서드별(POST/GET/PUT/DELETE) 명확한 역할 정의</li>
-      <li><strong>세션 관리</strong>:
-        <span class="code">express-session</span>과 <span class="code">cookie-parser</span>를 이용한 세션 유지 및 만료 처리</li>
-      <li><strong>비동기 제어</strong>:
-        <span class="code">async/await</span> + <span class="code">try/catch</span> 기반 오류 처리로 비동기 흐름 안정화</li>
-      <li><strong>공통 미들웨어 관리</strong>:
-        인증, 로깅, CORS, 에러 핸들링을 <span class="code">app.use()</span> 레벨에서 중앙 관리</li>
-      <li><strong>확장성 고려</strong>:
-        향후 일정 공유 기능 추가 시에도 기존 API 구조 수정 없이 확장 가능하도록 설계</li>
-    </ul>
-
-    <h2>주요 시나리오</h2>
-    <ul>
-      <li><strong>회원가입 → 로그인</strong>:
-        사용자는 이메일/비밀번호 입력 → <em>세션 생성</em> 후 메인 페이지 이동</li>
-      <li><strong>여행 일정 등록</strong>:
-        사용자가 여행 이름, 날짜, 장소 입력 → <em>MySQL Trip 테이블 저장</em></li>
-      <li><strong>지도 검색</strong>:
-        Kakao Map API를 통해 장소 검색 후 좌표 기반 <em>마커 표시</em></li>
-      <li><strong>계획 수정/삭제</strong>:
-        본인 소유 일정만 접근 가능하도록 <em>세션 사용자 ID 검증</em></li>
-      <li><strong>Android 연동</strong>:
-        동일 REST API를 모바일 클라이언트에서 호출하여 웹과 데이터 공유</li>
-    </ul>
-
-    <h2>트러블슈팅 & 문제 해결</h2>
-    <ul>
-      <li><strong>비동기 제어 혼선</strong>:
-        Promise 체인 중첩 → <em>async/await</em> 리팩토링으로 흐름 단순화</li>
-      <li><strong>CORS 정책 충돌</strong>:
-        프론트·모바일 연동 시 교차 출처 에러 → <em>CORS 미들웨어</em> 설정으로 해결</li>
-      <li><strong>세션 만료 이슈</strong>:
-        <em>cookie-parser</em>와 <em>express-session</em> 설정 분리 → 세션 지속성 정상화</li>
-      <li><strong>데이터 무결성</strong>:
-        외래키 제약조건 적용 → 일정 삭제 시 연관 데이터 자동 삭제</li>
-    </ul>
+    <h2>트러블슈팅 (Troubleshooting)</h2>
+    <div class="trouble-section">
+      <ul>
+        <li><strong>지도 렌더링 레이아웃 깨짐</strong>: 
+          React 렌더링 시점 문제로 지도 크기가 0으로 잡히는 현상 ➡️ <span class="code">map.relayout()</span> 비동기 호출로 해결.</li>
+        <li><strong>데이터 가공 주체 최적화</strong>: 
+          프론트엔드 부담을 줄이기 위해 백엔드 라우터에서 데이터 별칭(Alias) 및 가공 후 송신하여 유지보수성 향상.</li>
+        <li><strong>UI 스택 순서 이슈</strong>: 
+          지도와 검색 리스트의 Z-Index 충돌 ➡️ Stack Context 재설정으로 UI 가시성 확보.</li>
+      </ul>
+    </div>
 
     <h2>링크</h2>
-    <p><a href="https://github.com/JamongFriend/0UTripPlanner" target="_blank">GitHub 저장소 바로가기</a></p>
+    <p>🔗 <a href="https://github.com/JamongFriend/0UTripPlanner" target="_blank">GitHub Repository 바로가기</a></p>
 
     <a class="back-link" href="/">← 메인 페이지로 돌아가기</a>
   </div>
