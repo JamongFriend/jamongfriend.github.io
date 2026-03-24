@@ -43,33 +43,47 @@
 
     <h2>주요 기능 (Key Features)</h2>
     <ul>
-      <li><strong>스마트 플래너 CRUD & 상태 관리</strong>:
-        숙소, 인원, 목적 등 상세 데이터 처리 및 <span class="code">isMarked</span>, <span class="code">isShared</span> 플래그를 활용한 동적 상태 제어.
-        <img src="images/plan_create.png" alt="플래너 생성 화면" class="portfolio-img">
-        <img src="images/plan_list.png" alt="내 플래너 목록 화면" class="portfolio-img">
+      <li><strong>전략적 플래너 관리 및 상태 제어</strong>
+        <p>단순 CRUD를 넘어 <span class="code">isMarked</span>(즐겨찾기), <span class="code">isShared</span>(공유 여부) 등의 상태 값을 활용하여 사용자 맞춤형 데이터 필터링을 구현했습니다.
+           특히 공유된 플래너를 내 보관함으로 복제하는 **'Import'** 로직을 통해 데이터 재사용성을 높였습니다.</p>
+        <img src="images/plan_create.png" alt="상세 설정이 가능한 플래너 생성 화면" class="portfolio-img">
+        <img src="images/plan_list.png" alt="사용자별 맞춤형 플래너 목록 대시보드" class="portfolio-img">
+        <img src="images/plan_detail.png" alt="플래너 상세보기" class="portfolio-img">
       </li>
       
-      <li><strong>위치 기반 서비스 (LBS)</strong>:
-        키워드 검색 및 연관 검색어 리스트 제공. 클릭 시 <span class="code">panTo</span>를 활용한 부드러운 이동과 커스텀 마커/인포윈도우 렌더링.
-        <img src="images/map_interaction.png" alt="지도 인터랙션 화면" class="portfolio-img">
+      <li>
+        <strong>Kakao Maps API 커스텀 인터랙션</strong>
+        <p>단순 지도 표시에서 나아가, 키워드 검색 시 <span class="code">Places</span> 서비스를 연동하여 연관 검색어 리스트를 동적으로 생성했습니다. 
+          선택한 장소로의 부드러운 시점 이동(<span class="code">panTo</span>)과 여러 좌표를 한 화면에 담는 <span class="code">LatLngBounds</span>를 활용해 UX를 최적화했습니다.</p>
+        <img src="images/map_interaction.png" alt="실시간 검색 및 다중 마커 렌더링 지도 인터페이스" class="portfolio-img">
       </li>
 
-      <li><strong>소셜 공유 및 데이터 연동</strong>:
-        공개 게시판 구현 및 좋아요 시스템. Sequelize <strong>Include(Join)</strong>를 활용해 작성자 정보를 효율적으로 렌더링.
-        <img src="images/plan_share.png" alt="플래너 공유 게시판" class="portfolio-img">
-        <img src="images/plan_detail.png" alt="플래너 상세보기" class="portfolio-img">
+      <li>
+        <strong>관계형 데이터베이스 설계 및 최적화</strong>
+        <p>MySQL 환경에서 User와 Plan 테이블 간의 1:N 관계를 설정하고, Sequelize의 **Eager Loading(Include)**을 활용하여 쿼리 횟수를 줄이면서도 작성자 정보를 효율적으로 결합했습니다. 
+          이를 통해 공유 게시판에서 각 플래너의 소유주 정보를 실시간으로 렌더링합니다.</p>
+        <img src="images/plan_share.png" alt="데이터 조인(Join)이 적용된 소셜 공유 게시판 화면" class="portfolio-img">
       </li>
     </ul>
 
     <h2>트러블슈팅 (Troubleshooting)</h2>
     <div class="trouble-section">
       <ul>
-        <li><strong>지도 렌더링 레이아웃 깨짐</strong>: 
-          React 렌더링 시점 문제로 지도 크기가 0으로 잡히는 현상 ➡️ <span class="code">map.relayout()</span> 비동기 호출로 해결.</li>
-        <li><strong>데이터 가공 주체 최적화</strong>: 
-          프론트엔드 부담을 줄이기 위해 백엔드 라우터에서 데이터 별칭(Alias) 및 가공 후 송신하여 유지보수성 향상.</li>
-        <li><strong>UI 스택 순서 이슈</strong>: 
-          지도와 검색 리스트의 Z-Index 충돌 ➡️ Stack Context 재설정으로 UI 가시성 확보.</li>
+        <li>
+          <strong>React LifeCycle과 외부 Library(Map) 간의 동기화 이슈</strong>
+          <p>현상: 지도 컴포넌트 렌더링 시 부모 컨테이너의 크기 계산이 끝나기 전 지도가 로드되어 레이아웃이 깨짐.<br>
+          해결: <span class="code">useEffect</span>와 비동기 <span class="code">setTimeout</span>을 조합하여 렌더링 완료 시점을 확보하고, **`map.relayout()`**을 강제 호출하여 뷰포트를 정상화했습니다.</p>
+        </li>
+        <li>
+          <strong>지도 레이어와 검색 UI 간의 Z-Index 충돌</strong>
+          <p>현상: 지도 위에 띄운 연관 검색어 리스트가 지도 타일 레이어 뒤로 숨거나, 부모 컨테이너의 <span class="code">overflow: hidden</span> 속성에 잘려 보이는 현상. <br>
+          해결: 검색 컨테이너의 **Stack Context(쌓임 맥락)**를 재설정하고, <span class="code">z-index: 100</span> 이상 부여 및 포지셔닝 기준점(<span class="code">relative</span>)을 명확히 정의하여 UI 가시성을 확보했습니다.</p>
+        </li>
+        <li>
+          <strong>사용자 권한 검증 미들웨어 설계</strong>
+          <p>현상: URL 직접 접근을 통해 타인의 비공개 플래너를 수정/삭제할 수 있는 보안 취약점 발견.<br>
+          해결: <span class="code">Passport.js</span> 세션 데이터와 DB의 <span class="code">userId</span>를 대조하는 **커스텀 검증 미들웨어**를 라우터 레벨에서 구현하여 데이터 접근 권한을 엄격히 제한했습니다.</p>
+        </li>
       </ul>
     </div>
 
