@@ -4,35 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Soul of Herb Seller - 상세 페이지</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 2rem; background: #f9f9f9; }
-    .container { max-width: 980px; margin: auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    h1 { color: #333; margin-top: 0; }
-    ul { padding-left: 1.2rem; }
-    li { margin-bottom: 0.7rem; }
-    a { color: #007bff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .back-link { display: block; margin-top: 2rem; }
-    .code { font-family: Consolas, monospace; background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
-
-    /* 갤러리 */
-    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin: 1rem 0 2rem; }
-    .thumb { position: relative; padding-top: 62%; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.08); cursor: zoom-in; background: #eee; }
-    .thumb img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
-
-    /* 라이트박스 */
-    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 9999; }
-    .lightbox.open { display: flex; }
-    .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
-    .lightbox .close { position: absolute; top: 20px; right: 24px; font-size: 28px; color: #fff; cursor: pointer; }
-
-    .caption { color: #666; font-size: 0.92rem; margin-top: 0.5rem; }
-  </style>
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
   <div class="container">
     <h1>Soul of Herb Seller</h1>
-    <p><strong>기술 스택</strong>: Unreal Engine 5, Blueprint</p>
+    <p class="tech-stack">⚙️ Tech: Unreal Engine 5, Blueprint</p>
 
     <h2>프로젝트 개요</h2>
     <p>
@@ -106,7 +83,7 @@
     <h2>링크</h2>
     <p><a href="https://github.com/JamongFriend/SoulOfHerbSeller" target="_blank">GitHub 저장소 바로가기</a></p>
 
-    <a class="back-link" href="/">← 메인 페이지로 돌아가기</a>
+    <a class="back-link" href="../index.html">← 메인 페이지로 돌아가기</a>
   </div>
   <script>
     // 라이트박스
