@@ -18,14 +18,36 @@
 
     <h2>주요 기능 (Key Features)</h2>
     <ul>
-      <li><strong>실시간 메시징 (WebSocket/STOMP)</strong>: 
-        메시지 브로커를 활용한 실시간 채팅 및 <span class="code">ChannelInterceptor</span>를 통한 세션 기반 인증 구현.</li>
-      <li><strong>고유 식별 시스템 (Discord Style)</strong>: 
-        닉네임 중복을 허용하되 4자리 랜덤 태그를 조합하여 고유성을 보장하는 유저 식별 로직.</li>
+      <li>
+        <strong>실시간 메시징 및 가용성 확보</strong>
+        <p>WebSocket과 STOMP 프로토콜을 활용하여 전이중(Full-duplex) 통신 환경을 구축했습니다. 
+          메시지 브로커를 통해 수만 명의 동시 접속자를 처리할 수 있는 인프라를 설계하였으며, <span class="code">ChannelInterceptor</span>를 사용하여 연결 세션별 실시간 인증 및 권한 검증 로직을 구현했습니다.</p>
+        <img src="images/Chatzar/Chatzar_chatting.png" alt="STOMP 프로토콜 기반의 실시간 채팅 화면" class="portfolio-img">
+      </li>
+
+      <li>
+        <strong>고유 식별 시스템 (Discord Style)</strong>
+        <p>사용자가 인식하는 닉네임과 시스템이 식별하는 고유 ID를 분리했습니다. 닉네임 중복을 허용하되 4자리 랜덤 태그를 부여하여 사용자를 고유하게 식별하며, 
+          이를 통해 사용자 탐색의 편의성과 보안성을 동시에 확보했습니다.</p>
+        <img src="images/Chatzar/Chatzar_friend_list.png" alt="닉네임#태그 식별 체계가 적용된 친구 목록 화면" class="portfolio-img">
+        <img src="images/Chatzar/Chatzar_profile.png" alt="닉네임 변경 시 고유 태그를 유지하는 프로필 수정 화면" class="portfolio-img">
+      </li>
+
+      <li>
+        <strong>전략적 매칭 및 관계 기반 보안 가드</strong>
+        <p>사용자의 선호도(성별, 나이 등)를 반영한 동적 매칭 알고리즘을 구현했습니다. 특히, 상호 친구 수락(<span class="code">ACCEPTED</span>) 상태가 아닐 경우 메시지 발신을 제한하는 
+          **'Chat Lock'** 로직을 도입하여 스팸 메시지 차단 및 사용자 프라이버시를 보호했습니다.</p>
+        <img src="images/Chatzar/Chatzar_matching.png" alt="사용자 선호도 기반의 실시간 매칭 화면" class="portfolio-img">
+        <img src="images/Chatzar/Chatzar_matching_detail.png" alt="Nullable DTO가 적용된 매칭 조건 설정 화면" class="portfolio-img">
+        <img src="images/Chatzar/Chatzar_isMatching.png" alt="매칭 로딩 화면" class="portfolio-img">
+        </li>
+      <li><strong>관계 기반 보안 가드 (Chat Lock)</strong>: 
+        <p>상호 친구 수락(<span class="code">ACCEPTED</span>) 상태가 아닐 경우 메시지 발신을 제한하여 스팸 및 개인정보 노출 방지.</p>
+        <img src="images/Chatzar/Chatzar_isNotFriend.png" alt="채팅 종료 후 방에 재입장 할 경우 친구 유무에 따라 채팅 제한" class="portfolio-img">
+        <img src="images/Chatzar/Chatzar_friend_request.png" alt="친구 신청 확인" class="portfolio-img">
+      </li>
       <li><strong>JWT 기반 보안 아키텍처</strong>: 
         Access/Refresh Token 체계와 토큰 폐기(Revoke) 시스템을 통한 강력한 사용자 인증 및 인가.</li>
-      <li><strong>관계 기반 보안 가드 (Chat Lock)</strong>: 
-        상호 친구 수락(<span class="code">ACCEPTED</span>) 상태가 아닐 경우 메시지 발신을 제한하여 스팸 및 개인정보 노출 방지.</li>
       </ul>
 
     <h2>트러블슈팅 (Troubleshooting)</h2>
