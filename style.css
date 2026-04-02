@@ -50,3 +50,36 @@ footer { text-align: center; padding: 2rem; color: #888; font-size: 0.9rem; }
 
 /* Portfolio Image (Standardized) */
 .portfolio-img { display: block; max-width: 100%; height: auto; margin: 1.5rem 0; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); border: 1px solid #eee; }
+
+/* 사진들을 나란히 감싸는 박스 */
+.image-row {
+    display: flex;
+    justify-content: center; 
+    align-items: center; /* 사진 높이가 달라도 중앙 정렬 */
+    gap: 15px; 
+    width: 100%; 
+    margin: 20px 0;
+}
+
+/* image-row 안에 있는 모든 이미지 공통 적용 */
+.image-row img {
+    flex: 1;             /* 공간을 똑같이 나눠 가짐 */
+    min-width: 0;        /* flex 박스 밖으로 튀어나가는 것 방지 */
+    width: 100%;         /* 부모(flex-item) 너비에 맞춤 */
+    max-width: 350px;    /* 너무 커지는 것 방지 (휴대폰 화면 고려) */
+    height: auto;        /* 가로세로 비율 유지 */
+    max-height: 500px;   /* 세로로 너무 길어지는 것 방지 */
+    object-fit: contain; /* 사진이 잘리지 않고 박스 안에 쏙 들어가게 함 */
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 약간의 그림자로 입체감 추가 */
+}
+
+/* 단독으로 크게 나오는 사진 스타일 (portfolio-img) */
+.portfolio-img {
+    display: block;
+    margin: 10px auto;
+    max-width: 80%;      /* 화면의 80%만 차지하게 */
+    height: auto;
+    border-radius: 8px;
+}
