@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"D:\\\\code\\\\jamongfriend.github.io\" -Recurse -Directory)",
+      "Bash(Select-Object FullName)"
+    ]
+  }
+}

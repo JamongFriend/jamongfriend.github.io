@@ -1,9 +1,9 @@
-export const outripplanner = {
+export const oUTripPlanner = {
   id: "outripplanner",
   title: "0U Trip Planner",
   subtitle: "Full-stack 여행 플랫폼",
   tech: ["Node.js", "Express", "MySQL", "React.js", "Kakao Maps API", "Passport.js"],
-  description: "여행 계획을 생성하고 공유할 수 있는 웹 및 모바일 플랫폼. Kakao Map API를 연동한 실시간 장소 검색 및 시각화.",
+  description: "여행 계획을 생성하고 공유할 수 있는 웹 플랫폼. Kakao Map API를 연동한 실시간 장소 검색 및 시각화.",
   fullDescription: "0U Trip Planner는 나만의 여행 일정을 상세히 기록하고, 타인과 공유하며 소통할 수 있는 풀스택 웹 서비스입니다. 단순한 정보 기록을 넘어 공유(Share) 및 가져오기(Import) 로직을 통해 사용자 간 인터랙션을 극대화했으며, Kakao Map API를 깊이 있게 커스터마이징하여 실시간 장소 검색 및 시각화 기능을 구현했습니다.",
   mainImage: "/images/0UTripPlanner/main_screen.png",
   features: [

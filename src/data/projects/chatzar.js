@@ -1,9 +1,9 @@
-export const chatzar = {
+export const Chatzar = {
   id: "chatzar",
   title: "Chatzar",
   subtitle: "실시간 랜덤 채팅 플랫폼",
-  tech: ["Kotlin", "Spring Boot", "STOMP", "MySQL", "Spring Security", "JPA", "JUnit5"],
-  description: "랜덤 매칭을 통한 실시간 채팅 서비스. 친구 관계 미등록 시 채팅방 잠금 등 비즈니스 로직을 포함한 Full-Stack 프로젝트.",
+  tech: ["Java", "Spring Boot", "STOMP", "MySQL", "Spring Security", "JPA", "JUnit5", "Kotlin", "Android Studio"],
+  description: "랜덤 매칭을 통한 실시간 채팅 서비스. 친구 관계 미등록 시 채팅방 잠금 등 비즈니스 로직을 포함한 안드로이드 애플리케이션",
   fullDescription: "Chatzar는 보안성과 실시간성을 극대화한 채팅 서비스의 백엔드 시스템입니다. 닉네임#태그 시스템을 통한 고유 식별 체계를 구축하였으며, WebSocket 기반의 양방향 통신 환경에서 발생할 수 있는 보안 충돌 및 비동기 경주 상태(Race Condition) 문제를 해결하며 안정적인 인프라를 구축하는 데 집중했습니다.",
   features: [
     {

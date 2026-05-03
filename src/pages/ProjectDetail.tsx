@@ -5,7 +5,7 @@ import { projects } from '../data/projects';
 
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const project = projects.find((p) => p.id === id);
+  const project: any = (projects as any[]).find((p: any) => p.id === id);
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
 
   if (!project) {
@@ -30,7 +30,7 @@ const ProjectDetail = () => {
 
       <h2>주요 기능 (Key Features)</h2>
       <ul>
-        {project.features.map((feature, idx) => (
+        {project.features.map((feature: any, idx: number) => (
           <li key={idx}>
             <strong>{feature.title}</strong>
             <p>{feature.desc}</p>
@@ -41,7 +41,7 @@ const ProjectDetail = () => {
             )}
             {feature.images && (
               <div className="image-row">
-                {feature.images.map((img, i) => (
+                {feature.images.map((img: any, i: number) => (
                   <img key={i} src={img} alt={`${feature.title} ${i}`} className="portfolio-img" onClick={() => setLightboxImg(img)} style={{ cursor: 'zoom-in' }} />
                 ))}
               </div>
@@ -53,12 +53,12 @@ const ProjectDetail = () => {
       {project.troubleshooting.length > 0 && (
         <>
           <h2>트러블슈팅 (Troubleshooting)</h2>
-          {project.troubleshooting.map((item, idx) => (
+          {project.troubleshooting.map((item: any, idx: number) => (
             <div className="trouble-section" key={idx}>
               <span className="trouble-title">{item.title}</span>
               {Array.isArray(item.content) ? (
                 <ul>
-                  {item.content.map((c, i) => (
+                  {item.content.map((c: any, i: number) => (
                     <li key={i}>{c}</li>
                   ))}
                 </ul>
@@ -74,7 +74,7 @@ const ProjectDetail = () => {
         <>
           <h2>플레이 화면 스크린샷</h2>
           <div className="gallery">
-            {project.gallery.map((img, idx) => (
+            {project.gallery.map((img: any, idx: number) => (
               <div className="thumb" key={idx} onClick={() => setLightboxImg(img)}>
                 <img src={img} alt={`Screenshot ${idx}`} />
               </div>

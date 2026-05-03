@@ -1,4 +1,4 @@
-export const librarymanagement = {
+export const LibraryManagement = {
   id: "librarymanagement",
   title: "Library Management System",
   subtitle: "도서 관리 백엔드 시스템",

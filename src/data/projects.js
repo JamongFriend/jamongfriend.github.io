@@ -1,13 +1,13 @@
-import { chatzar } from './projects/chatzar';
-import { outripplanner } from './projects/outripplanner';
-import { outripplannerandroid } from './projects/outripplannerandroid';
-import { librarymanagement } from './projects/librarymanagement';
-import { soulofherbseller } from './projects/soulofherbseller';
+import { Dalmoa} from './projects/Dalmoa';
+import { Chatzar } from './projects/Chatzar';
+import { oUTripPlanner } from './projects/0UTripPlanner';
+import { LibraryManagement } from './projects/LibraryManagement';
+import { SoulOfHerbSeller } from './projects/SoulOfHerbSeller';
 
 export const projects = [
-  chatzar,
-  outripplanner,
-  outripplannerandroid,
-  librarymanagement,
-  soulofherbseller
+  Chatzar,
+  oUTripPlanner,
+  Dalmoa,
+  LibraryManagement,
+  SoulOfHerbSeller
 ];

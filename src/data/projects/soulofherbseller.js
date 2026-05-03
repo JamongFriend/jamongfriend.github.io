@@ -1,4 +1,4 @@
-export const soulofherbseller = {
+export const SoulOfHerbSeller = {
   id: "soulofherbseller",
   title: "Soul of Herb Seller",
   subtitle: "UE5 기반 액션 어드벤처",
