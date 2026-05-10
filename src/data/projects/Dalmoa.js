@@ -49,5 +49,6 @@ export const Dalmoa = {
       content: "현상: 비동기 API 호출 중 UI 스레드 블로킹 및 Null 참조로 인한 런타임 크래시 발생. 해결: Kotlin Coroutines 기반 비동기 처리와 ViewBinding을 통한 Null-safety 확보로 런타임 안정성 및 UX 개선."
     }
   ],
+  flow: "/flows/DalmoaFlow.md",
   github: "https://github.com/JamongFriend/Dalmoa"
 };

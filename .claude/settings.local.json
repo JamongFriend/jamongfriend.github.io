@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(Get-ChildItem -Path \"D:\\\\code\\\\jamongfriend.github.io\" -Recurse -Directory)",
-      "Bash(Select-Object FullName)"
+      "Bash(Select-Object FullName)",
+      "Bash(npm install *)",
+      "Bash(npx tsc *)"
     ]
   }
 }

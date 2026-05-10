@@ -37,5 +37,6 @@ export const oUTripPlanner = {
       content: "현상: URL 직접 접근을 통해 타인의 비공개 플래너를 수정/삭제할 수 있는 보안 취약점 발견. 해결: Passport.js 세션 데이터와 DB의 userId를 대조하는 커스텀 검증 미들웨어를 라우터 레벨에서 구현하여 데이터 접근 권한을 엄격히 제한했습니다."
     }
   ],
+  flow: "/flows/0UTipPlannerFlow.md",
   github: "https://github.com/JamongFriend/0UTripPlanner"
 };

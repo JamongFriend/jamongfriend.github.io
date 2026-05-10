@@ -45,5 +45,6 @@ export const Chatzar = {
       ]
     }
   ],
+  flow: "/flows/ChatzarFlow.md",
   github: "https://github.com/JamongFriend/Chatzar"
 };
