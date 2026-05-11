@@ -8,11 +8,11 @@ const Home = () => {
       <section>
         <h2>📂 주요 프로젝트</h2>
         <ul className="project-list">
-          {projects.map((project) => (
+          {projects.map((project: any) => (
             <li key={project.id}>
               <span className="project-title">{project.title} ({project.subtitle})</span>
               <div className="project-tags">
-                {project.tech.map((tag) => (
+                {project.tech.map((tag: any) => (
                   <span key={tag} className="project-tag">{tag}</span>
                 ))}
               </div>
