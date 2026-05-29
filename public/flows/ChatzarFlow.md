@@ -74,7 +74,7 @@ graph TB
 ## 2. 클린 아키텍처 레이어 구조
 
 ```mermaid
-graph LR
+flowchart LR
     subgraph UI["UI (Fragment)"]
         direction TB
         U1[View 렌더링]

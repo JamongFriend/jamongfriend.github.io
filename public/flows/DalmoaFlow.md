@@ -94,7 +94,7 @@ sequenceDiagram
     Svc->>DB: 이메일로 회원 조회
     Svc->>Svc: BCrypt 비밀번호 검증
     Svc->>Svc: AccessToken + RefreshToken 발급
-    Note right of Svc: rememberMe=true → 장기 만료<br/>rememberMe=false → 1일 만료
+    Note right of Svc: rememberMe=true → 장기 만료 / rememberMe=false → 1일 만료
     Svc->>DB: RefreshToken 저장
     DB-->>App: TokenResponse (accessToken, refreshToken)
     App->>App: TokenManager에 토큰 저장
@@ -203,7 +203,7 @@ flowchart TD
     Cache -- HIT --> CacheReturn["캐시에서 환율 반환"]
     Cache -- MISS --> ExtAPI["ExchangeRate API 호출\n→ 캐시 저장"]
 
-    Direct & CacheReturn & ExtAPI --> Response["DashboardResponse\n{ total: 전체 KRW 환산액,\n  categorySums: {OTT, MUSIC, GAME ...} }"]
+    Direct & CacheReturn & ExtAPI --> Response["DashboardResponse\ntotal: 전체 KRW 환산액\ncategorySums: OTT, MUSIC, GAME ..."]
 
     Response --> App
 ```
