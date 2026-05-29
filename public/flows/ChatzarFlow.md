@@ -7,7 +7,7 @@
 ## 1. 전체 아키텍처
 
 ```mermaid
-graph TB
+flowchart TB
     subgraph Presentation["Presentation Layer"]
         F1[LoginFragment]
         F2[SignupFragment]
@@ -119,7 +119,7 @@ sequenceDiagram
     participant Fragment as LoginFragment
     participant VM as LoginViewModel
     participant Repo as AuthRepository
-    participant API as AuthApi (Retrofit)
+    participant API as AuthApi-Retrofit
     participant Server as Spring Server
     participant Token as TokenManager
 

@@ -71,11 +71,13 @@ const FlowDiagram = ({ flowUrl }: { flowUrl: string }) => {
         const parsed = parseSections(text);
         const rendered: Section[] = [];
         for (let i = 0; i < parsed.length; i++) {
+          const id = `flow-${i}-${Date.now()}`;
           try {
-            const { svg } = await mermaid.render(`flow-${i}-${Date.now()}`, parsed[i].code);
+            const { svg } = await mermaid.render(id, parsed[i].code);
             rendered.push({ heading: parsed[i].heading, svg });
           } catch (e) {
             console.error('Mermaid render error:', e);
+            document.getElementById(id)?.remove();
           }
         }
         setSections(rendered);
