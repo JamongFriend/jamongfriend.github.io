@@ -167,8 +167,8 @@ flowchart TD
     end
 
     subgraph Logic["SubscribeService 도메인 규칙"]
-        C1["currency == null → KRW 기본값 적용"]
-        C2["subCategory == ETC → customCategoryTag 저장\n그 외 → customCategoryTag = null"]
+        C1["currency == null이면 KRW 기본값 적용"]
+        C2["subCategory == ETC이면 customCategoryTag 저장<br/>그 외에는 null"]
         C3["소유자(memberId) 검증 후 삭제"]
     end
 
@@ -201,7 +201,7 @@ flowchart TD
     Check -- KRW --> Direct["그대로 반환"]
     Check -- USD --> Cache{"@Cacheable\n캐시 확인"}
     Cache -- HIT --> CacheReturn["캐시에서 환율 반환"]
-    Cache -- MISS --> ExtAPI["ExchangeRate API 호출\n→ 캐시 저장"]
+    Cache -- MISS --> ExtAPI["ExchangeRate API 호출 후 캐시 저장"]
 
     Direct & CacheReturn & ExtAPI --> Response["DashboardResponse\ntotal: 전체 KRW 환산액\ncategorySums: OTT, MUSIC, GAME ..."]
 

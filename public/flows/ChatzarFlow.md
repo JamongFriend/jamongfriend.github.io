@@ -104,7 +104,7 @@ flowchart LR
     UI -- "함수 호출" --> VM
     VM -- "StateFlow emit" --> UI
     VM -- "suspend fun" --> Repo
-    Repo -- "Response<T>" --> VM
+    Repo -- "Response(T)" --> VM
     Repo -- "HTTP 요청" --> Data
     Data -- "JSON 응답" --> Repo
 ```

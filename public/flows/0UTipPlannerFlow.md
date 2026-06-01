@@ -6,7 +6,7 @@
 graph TD
     User((사용자)) --> React
 
-    subgraph Frontend [:3000]
+    subgraph Frontend ["Frontend :3000"]
         React[React 18]
         AuthCtx[AuthContext\n전역 인증 상태]
         Pages[페이지 컴포넌트\nMyPlanner / Share / Bookmarks\nCreate / Edit / Map]
@@ -21,7 +21,7 @@ graph TD
     Pages --> |Axios HTTP/REST| Express
     Pages --> KakaoSDK
 
-    subgraph Backend [:8002]
+    subgraph Backend ["Backend :8002"]
         Express[Express.js]
         Passport[Passport.js\nLocal Strategy]
         Session[express-session\n세션 관리]
@@ -173,16 +173,16 @@ sequenceDiagram
     KakaoAPI-->>React: 검색 결과 리스트 + 좌표(lat/lng)
     사용자->>React: 결과 클릭 → 지도 PanTo
 
-    사용자->>React: 플래너 기본 정보 입력\n(여행지·날짜·인원·목적)
-    사용자->>React: 일차별 일정 추가\n(N일차 · 시간 · 카테고리 · 장소)
+    사용자->>React: 플래너 기본 정보 입력 (여행지·날짜·인원·목적)
+    사용자->>React: 일차별 일정 추가 (N일차 · 시간 · 카테고리 · 장소)
 
-    React->>Express: POST /myPlanner/create\n{ planName, startDate, endDate, ... }
+    React->>Express: POST /myPlanner/create (planName, startDate, endDate, ...)
     Express->>DB: INSERT INTO plans
     DB-->>Express: planId 반환
     Express-->>React: { success: true, planId }
 
     loop 각 DayPlace 항목
-        React->>Express: POST /dayPlace/create\n{ planId, day, time, title, category, placeName, lat, lng }
+        React->>Express: POST /dayPlace/create (planId, day, time, title, category, lat, lng)
         Express->>DB: INSERT INTO day_places
         DB-->>Express: OK
     end
