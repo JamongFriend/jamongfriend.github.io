@@ -130,8 +130,8 @@ sequenceDiagram
     Repo->>API: POST /api/v1/auth/login
     API->>Server: HTTP Request
     Server-->>API: 200 OK { accessToken, ... }
-    API-->>Repo: Response<LoginResponse>
-    Repo-->>VM: Response<LoginResponse>
+    API-->>Repo: Response(LoginResponse)
+    Repo-->>VM: Response(LoginResponse)
     VM->>Token: saveToken(accessToken)
     VM->>VM: UiState = Success
     VM-->>Fragment: StateFlow 업데이트
@@ -211,7 +211,7 @@ sequenceDiagram
 
     Fragment->>VM: getMessages(roomId)
     VM->>Server: GET /api/v1/messages/{roomId}
-    Server-->>VM: List<MessageResponse> (이전 메시지)
+    Server-->>VM: List(MessageResponse) - 이전 메시지
     VM->>VM: UiState = HistorySuccess
     VM-->>Fragment: 이전 메시지 표시
 
@@ -258,7 +258,7 @@ sequenceDiagram
     FRF->>VM2: loadPendingRequests()
     VM2->>Repo: getPendingRequests()
     Repo->>Server: GET /api/v1/friends/pending
-    Server-->>Repo: List<FriendshipResponse>
+    Server-->>Repo: List(FriendshipResponse)
     VM2-->>FRF: 대기 중인 요청 목록 표시
 
     User->>FRF: 수락 버튼
