@@ -29,20 +29,16 @@ export const Chatzar = {
   ],
   troubleshooting: [
     {
-      title: "🛡️ 보안 및 인증 시스템 고도화",
-      content: [
-        "테스트 환경 데이터 정합성 이슈: BCrypt 암호화 규격 미달로 인한 로그인 테스트 실패 ➡️ BCryptPasswordEncoder를 내장한 정적 테스트 픽스처(MemberFixture) 도입으로 해결.",
-        "Refresh Token 무한 재사용 방지: 이미 사용된 리프레시 토큰의 보안 취약점 ➡️ DB 레벨에서 isUsed 상태 체크 및 예외 처리를 통해 토큰 재발급 로직 강화.",
-        "Spring Security와 WebSocket 핸드쉐이크 충돌: JWT 필터가 웹소켓 초기 연결을 차단하는 문제 ➡️ 엔드포인트 개방 후 STOMP 인터셉터 기반의 2단계 인증 구조로 전환."
-      ]
+      title: "보안 사각지대 해소",
+      problem: "WebSocket 연결 시 서버가 403을 반환하며 핸드쉐이크 자체가 실패",
+      cause: "Spring Security의 JwtAuthFilter가 HTTP 레벨에서 /ws/** 업그레이드 요청을 가로채 JWT 검증을 수행, 일반 HTTP와 동일한 방식으로 처리하여 차단",
+      solution: "SecurityConfig에서 /ws/** 경로를 HTTP 필터 대상에서 제외하고, STOMP CONNECT 명령 수신 시점에 StompAuthInterceptor가 Authorization 헤더를 검증하는 이중 검증 레이어로 변경"
     },
     {
-      title: "⚡ 성능 최적화 및 실시간 통신 안정화",
-      content: [
-        "검색 성능 및 사용자 식별성 개선: 중복 닉네임 과다 노출 문제 ➡️ 닉네임과 태그를 조합한 복합 인덱스(Composite Index) 활용 및 정확한 1인 타겟팅 검색 로직 구현.",
-        "비동기 환경에서의 경주 상태(Race Condition): 웹소켓 연결 완료 전 구독 시도로 인한 앱 종료 ➡️ 상태 이벤트 기반의 지연 구독(Lazy Subscription) 패턴 적용으로 안정성 확보.",
-        "서버-클라이언트 데이터 규격 불일치: 필드명 차이 및 Null 전달 시 역직렬화 오류 ➡️ Jackson 매핑 규격 통일 및 방어적 코드(Default Value) 작성을 통한 시스템 견고함 증대."
-      ]
+      title: "WebSocket 연결 완료 전 구독 시도로 인한 크래시",
+      problem: "채팅방 진입 시 간헐적으로 앱이 크래시하며 메시지 수신 불가",
+      cause: "StompClient.connect() 호출 직후 토픽 구독을 시도하여, 연결이 완료되지 않은 상태에서 구독 명령이 실행",
+      solution: "lifecycle() 이벤트를 먼저 구독하고 OPENED 콜백 내에서만 토픽 구독을 실행하는 지연 구독(Lazy Subscription) 패턴 적용"
     }
   ],
   flow: "/flows/ChatzarFlow.md",

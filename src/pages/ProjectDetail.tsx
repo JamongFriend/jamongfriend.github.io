@@ -165,7 +165,7 @@ const ProjectDetail = () => {
               </div>
             )}
             {feature.images && (
-              <div className="image-row">
+              <div className={feature.images.length >= 4 ? "image-row image-row-2col" : "image-row"}>
                 {feature.images.map((img: any, i: number) => (
                   <img key={i} src={img} alt={`${feature.title} ${i}`} className="portfolio-img" onClick={() => setLightboxImg(img)} style={{ cursor: 'zoom-in' }} />
                 ))}
@@ -181,7 +181,13 @@ const ProjectDetail = () => {
           {project.troubleshooting.map((item: any, idx: number) => (
             <div className="trouble-section" key={idx}>
               <span className="trouble-title">{item.title}</span>
-              {Array.isArray(item.content) ? (
+              {item.problem ? (
+                <ul className="trouble-detail">
+                  <li><strong>문제</strong> {item.problem}</li>
+                  <li><strong>원인</strong> {item.cause}</li>
+                  <li><strong>해결</strong> {item.solution}</li>
+                </ul>
+              ) : Array.isArray(item.content) ? (
                 <ul>
                   {item.content.map((c: any, i: number) => (
                     <li key={i}>{c}</li>

@@ -29,24 +29,16 @@ export const Dalmoa = {
   ],
   troubleshooting: [
     {
-      title: "인프라 가용성 확보 — AWS EBS 볼륨 확장",
-      content: "현상: 배포 중 디스크 용량 부족으로 컨테이너 실행 실패. 해결: AWS EBS 볼륨 확장 및 파티션 최적화를 통해 안정적인 가동 환경 구축."
+      title: "타인 데이터 접근 취약점(IDOR) 차단",
+      problem: "URL 경로 변수(userId 등)를 조작해 다른 사용자의 데이터에 접근 가능한 취약점 존재",
+      cause: "요청자 검증을 Path Variable 기반으로 처리하여 클라이언트 측 값 변조 시 인가 우회 가능",
+      solution: "URL 경로 변수 제거 후 Security Context / JWT 기반 인가 로직 재설계하여 취약점 원천 차단"
     },
     {
-      title: "API 권한 강화 — IDOR 취약점 원천 차단",
-      content: "현상: URL 경로 변수(userId)를 통해 타인의 구독 데이터에 접근 가능한 보안 취약점(IDOR) 발견. 해결: URL 경로 변수를 제거하고 Security Context/JWT에서 사용자 정보를 추출하도록 로직 개선."
-    },
-    {
-      title: "DB 커넥션 관리 — Docker 네트워크 충돌",
-      content: "현상: Docker 기반 MySQL 연동 시 컨테이너 초기화 타이밍 문제로 네트워크 충돌 발생. 해결: 볼륨 마운트 및 네트워크 브릿지 설정으로 컨테이너 간 의존성 관리 및 안정화."
-    },
-    {
-      title: "환경 일관성 유지 — 로컬-서버 배포 표준화",
-      content: "현상: 빌드 환경(JDK 21) 및 Docker Compose 버전 호환성 이슈로 로컬 빌드 성공 후 서버 배포 실패. 해결: Docker Multi-stage Build로 빌드 환경을 컨테이너 내에 고정하여 환경 차이를 제거."
-    },
-    {
-      title: "사용자 경험 개선 — Kotlin Coroutines & Null-safety",
-      content: "현상: 비동기 API 호출 중 UI 스레드 블로킹 및 Null 참조로 인한 런타임 크래시 발생. 해결: Kotlin Coroutines 기반 비동기 처리와 ViewBinding을 통한 Null-safety 확보로 런타임 안정성 및 UX 개선."
+      title: "Docker 기반 MySQL 연동 장애",
+      problem: "Docker Compose 실행 시 애플리케이션 컨테이너가 DB 연결 실패로 기동 불가",
+      cause: "컨테이너 초기화 순서 불일치로 DB 준비 전 앱이 연결을 시도하고, 브릿지 네트워크 설정 누락으로 컨테이너 간 통신 실패",
+      solution: "depends_on + healthcheck 설정으로 초기화 순서 보장, 네트워크 브릿지 및 볼륨 마운트 구성으로 안정화"
     }
   ],
   flow: "/flows/DalmoaFlow.md",

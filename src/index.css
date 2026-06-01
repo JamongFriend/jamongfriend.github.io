@@ -284,6 +284,18 @@ footer {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/* 이미지 4개를 2열로 고정 */
+.image-row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+.image-row-2col .portfolio-img {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
 /* 단독으로 크게 나오는 사진 스타일 (portfolio-img) */
 .portfolio-img {
   display: block;
