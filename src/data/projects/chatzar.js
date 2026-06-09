@@ -2,13 +2,15 @@ export const Chatzar = {
   id: "chatzar",
   title: "Chatzar",
   subtitle: "실시간 랜덤 채팅 플랫폼",
+  period: "",   // 예: "2024.03 ~ 2024.05"
+  role: "",     // 예: "백엔드 개발 / 1인 개발" 또는 "팀장 · 백엔드 (3인 팀)"
   tech: ["Java", "Spring Boot", "STOMP", "MySQL", "Spring Security", "JPA", "JUnit5", "Kotlin", "Android Studio"],
   description: "랜덤 매칭을 통한 실시간 채팅 서비스. 친구 관계 미등록 시 채팅방 잠금 등 비즈니스 로직을 포함한 안드로이드 애플리케이션",
   fullDescription: "Chatzar는 보안성과 실시간성을 극대화한 채팅 서비스의 백엔드 시스템입니다. 닉네임#태그 시스템을 통한 고유 식별 체계를 구축하였으며, WebSocket 기반의 양방향 통신 환경에서 발생할 수 있는 보안 충돌 및 비동기 경주 상태(Race Condition) 문제를 해결하며 안정적인 인프라를 구축하는 데 집중했습니다.",
   features: [
     {
       title: "실시간 메시징 및 가용성 확보",
-      desc: "WebSocket과 STOMP 프로토콜을 활용하여 전이중(Full-duplex) 통신 환경을 구축했습니다. 메시지 브로커를 통해 수만 명의 동시 접속자를 처리할 수 있는 인프라를 설계하였으며, ChannelInterceptor를 사용하여 연결 세션별 실시간 인증 및 권한 검증 로직을 구현했습니다.",
+      desc: "WebSocket과 STOMP 프로토콜을 활용하여 전이중(Full-duplex) 통신 환경을 구축했습니다. 메시지 브로커 패턴을 적용해 연결 수에 비례해 수평 확장이 가능한 구조로 설계하였으며, ChannelInterceptor를 사용하여 연결 세션별 실시간 인증 및 권한 검증 로직을 구현했습니다.",
       image: "/images/Chatzar/Chatzar_chatting.png"
     },
     {
@@ -17,17 +19,16 @@ export const Chatzar = {
       images: ["/images/Chatzar/Chatzar_friend_list.png", "/images/Chatzar/Chatzar_profile.png"]
     },
     {
-      title: "전략적 매칭 및 관계 기반 보안 가드",
-      desc: "사용자의 선호도(성별, 나이 등)를 반영한 동적 매칭 알고리즘을 구현했습니다. 특히, 상호 친구 수락(ACCEPTED) 상태가 아닐 경우 메시지 발신을 제한하는 'Chat Lock' 로직을 도입하여 스팸 메시지 차단 및 사용자 프라이버시를 보호했습니다.",
-      images: ["/images/Chatzar/Chatzar_matching.png", "/images/Chatzar/Chatzar_matching_detail.png", "/images/Chatzar/Chatzar_isMatching.png"]
-    },
-    {
-      title: "관계 기반 보안 가드 (Chat Lock)",
-      desc: "상호 친구 수락(ACCEPTED) 상태가 아닐 경우 메시지 발신을 제한하여 스팸 및 개인정보 노출 방지.",
-      images: ["/images/Chatzar/Chatzar_isNotFriend.png", "/images/Chatzar/Chatzar_friend_request.png"]
+      title: "전략적 매칭 및 관계 기반 보안 가드 (Chat Lock)",
+      desc: "사용자의 선호도(성별, 나이 등)를 반영한 동적 매칭 알고리즘을 구현했습니다. 매칭 후에도 상호 친구 수락(ACCEPTED) 상태가 아니면 메시지 발신 자체를 서버에서 차단하는 'Chat Lock' 로직을 도입하여 스팸 메시지 차단 및 사용자 프라이버시를 보호했습니다.",
+      images: ["/images/Chatzar/Chatzar_matching.png", "/images/Chatzar/Chatzar_matching_detail.png", "/images/Chatzar/Chatzar_isMatching.png", "/images/Chatzar/Chatzar_isNotFriend.png", "/images/Chatzar/Chatzar_friend_request.png"]
     }
   ],
   troubleshooting: [
+    {
+      title: "JUnit5 통합 테스트 26개 작성 (8개 서비스 클래스)",
+      content: "AuthService, FriendshipService, MatchService 등 핵심 비즈니스 로직 전반에 걸쳐 @SpringBootTest 기반 실제 DB 연동 통합 테스트 26개를 작성했습니다. FriendshipService 6개(친구 요청 수락/거절/중복/자기 자신 요청 등), MatchService 4개(매칭 성공/대기/취소/상태 조회), AuthService 관련 6개(로그인 실패·로그아웃·토큰 재발급 등) 등 실제 동작 시나리오를 검증했습니다."
+    },
     {
       title: "보안 사각지대 해소",
       problem: "WebSocket 연결 시 서버가 403을 반환하며 핸드쉐이크 자체가 실패",

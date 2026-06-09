@@ -2,6 +2,8 @@ export const SoulOfHerbSeller = {
   id: "soulofherbseller",
   title: "Soul of Herb Seller",
   subtitle: "UE5 기반 액션 어드벤처",
+  period: "",   // 예: "2024.03 ~ 2024.05"
+  role: "",     // 예: "게임 개발 / 1인 개발"
   tech: ["Unreal Engine 5", "Blueprint", "C++"],
   description: "Unreal Engine 5 기반 메트로바니아 장르 플렛포머 게임. 식물 채집 및 보스 전투 시스템.",
   fullDescription: "Soul of Herb Seller는 식물을 채집하고, 수집한 재료로 캐릭터를 강화하며 보스 몬스터를 처치하는 3D 액션 어드벤처 게임입니다. Unreal Engine 5의 Blueprint를 활용하여 이벤트 중심 게임 로직과 캐릭터 상호작용을 구현했습니다. 데이터 흐름과 상태 전이를 객체 단위로 관리하며, 유지보수가 용이한 구조로 설계했습니다.",

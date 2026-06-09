@@ -114,6 +114,12 @@ const ProjectDetail = () => {
   return (
     <div className="container">
       <h1>{project.title} ({project.subtitle})</h1>
+      {(project.period || project.role) && (
+        <div style={{ display: 'flex', gap: '1.5rem', margin: '0.5rem 0 1rem', color: '#495057', fontSize: '0.95rem' }}>
+          {project.period && <span>📅 <strong>기간</strong>: {project.period}</span>}
+          {project.role && <span>🧑‍💻 <strong>역할</strong>: {project.role}</span>}
+        </div>
+      )}
       <p className="tech-stack">⚙️ Tech: {project.tech.join(', ')}</p>
 
       <h2>프로젝트 개요</h2>

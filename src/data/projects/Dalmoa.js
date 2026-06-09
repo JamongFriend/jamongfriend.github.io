@@ -2,13 +2,15 @@ export const Dalmoa = {
   id: "dalmoa",
   title: "Dalmoa",
   subtitle: "구독 통합 관리 서비스",
-  tech: ["Java 21", "Spring Boot", "Spring Security", "JWT", "MySQL", "Kotlin", "MVVM", "Retrofit2", "OkHttp3", "Coroutines", "Docker Compose", "AWS", "Spring Cache"],
+  period: "",   // 예: "2024.03 ~ 2024.05"
+  role: "",     // 예: "백엔드 · Android 개발 / 1인 개발"
+  tech: ["Java 21", "Spring Boot", "Spring Security", "JWT", "MySQL", "Kotlin", "MVVM", "Retrofit2", "OkHttp3", "Coroutines", "Docker Compose", "AWS", "Bucket4j"],
   description: "Netflix, Spotify 같은 흩어진 구독 서비스들을 한 곳에서 관리하고, 해외 결제 환율까지 자동 계산해주는 안드로이드 앱.",
-  fullDescription: "Dalmoa는 OTT, 음악, 게임 등 6개 카테고리의 구독 서비스를 통합 관리하는 Android 네이티브 앱입니다. 실시간 환율 API 연동으로 USD 구독료를 자동 원화 환산하고 월 총 지출을 계산합니다. Backend는 Java 21 + Spring Boot 3 기반의 Clean Architecture(4계층)로 설계했으며, Android는 MVVM 패턴과 Kotlin Coroutines로 비동기 처리를 구현했습니다. Docker Compose와 AWS(Nginx 리버스 프록시) 기반으로 배포 자동화를 완성한 풀스택 프로젝트입니다.",
+  fullDescription: "Dalmoa는 OTT, 음악, 게임 등 6개 카테고리의 구독 서비스를 통합 관리하는 Android 네이티브 앱입니다. 외부 환율 API를 12시간 주기로 DB에 선제 갱신하여 USD 구독료를 원화로 자동 환산하고 월 총 지출을 계산합니다. Backend는 Java 21 + Spring Boot 3 기반의 Clean Architecture(4계층)로 설계했으며, Android는 MVVM 패턴과 Kotlin Coroutines로 비동기 처리를 구현했습니다. Docker Compose와 AWS(Nginx 리버스 프록시) 기반으로 배포 자동화를 완성한 풀스택 프로젝트입니다.",
   features: [
     {
       title: "실시간 환율 연동 엔진",
-      desc: "외부 환율 API를 연동하여 USD 구독료를 KRW로 즉시 환산하는 통화 변환 로직을 구현했습니다. Spring Cache(@Cacheable)를 적용하여 반복 API 호출을 캐싱함으로써 응답 속도를 개선하고 네트워크 오버헤드를 최소화했습니다."
+      desc: "외부 환율 API를 연동하여 USD 구독료를 KRW로 즉시 환산하는 통화 변환 로직을 구현했습니다. @Scheduled로 앱 시작 시 및 12시간마다 환율을 DB에 선제 갱신하고, 클라이언트 요청 시 DB에서 조회하는 구조로 외부 API 반복 호출을 제거했습니다."
     },
     {
       title: "대시보드 & 통계 API",
@@ -17,6 +19,10 @@ export const Dalmoa = {
     {
       title: "스케줄링 기반 알림 시스템",
       desc: "Spring Task Scheduler를 활용하여 매일 오전 9시에 구독 결제일이 도래한 사용자에게 맞춤형 푸시 알림을 발송하는 로직을 구현했습니다."
+    },
+    {
+      title: "Rate Limiting — 브루트포스 공격 방어",
+      desc: "Bucket4j 라이브러리를 활용한 IP 기반 요청 속도 제한을 구현했습니다. 로그인·회원가입 엔드포인트에 한해 IP당 분당 10회 초과 요청 시 429(Too Many Requests)를 반환하는 OncePerRequestFilter를 적용하여 자격증명 무차별 대입(Brute-force) 공격을 방어했습니다."
     },
     {
       title: "안정적인 회원 인증 체계",

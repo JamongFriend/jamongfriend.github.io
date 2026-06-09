@@ -2,6 +2,8 @@ export const LibraryManagement = {
   id: "librarymanagement",
   title: "Library Management System",
   subtitle: "도서 관리 백엔드 시스템",
+  period: "",   // 예: "2024.03 ~ 2024.05"
+  role: "",     // 예: "백엔드 개발 / 1인 개발"
   tech: ["Java", "Spring Boot", "JPA", "MySQL"],
   description: "객체 지향 설계를 바탕으로 한 RESTful API 서버 구축 연습. ISBN 연동 및 예약 자동화 로직 구현.",
   fullDescription: "도서 등록/대여/반납/예약 전 과정을 관리하는 백엔드 시스템입니다. 도메인–리포지토리–서비스–컨트롤러의 계층 구조로 설계했고, Admin*/App* 컨트롤러를 분리해 관리자 화면과 사용자 기능을 명확히 구분했습니다. 국립중앙도서관 OpenAPI와 연동하여 ISBN으로 책 정보를 조회·자동 등록하는 기능을 제공합니다.",
