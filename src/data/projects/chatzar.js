@@ -17,13 +17,13 @@ export const Chatzar = {
       images: ["/images/Chatzar/Chatzar_friend_list.png", "/images/Chatzar/Chatzar_profile.png"]
     },
     {
-      title: "전략적 매칭 및 관계 기반 보안 가드",
-      desc: "사용자의 선호도(성별, 나이 등)를 반영한 동적 매칭 알고리즘을 구현했습니다. 특히, 상호 친구 수락(ACCEPTED) 상태가 아닐 경우 메시지 발신을 제한하는 'Chat Lock' 로직을 도입하여 스팸 메시지 차단 및 사용자 프라이버시를 보호했습니다.",
+      title: "전략적 매칭 및 관계 기반 Chat Lock",
+      desc: "사용자의 선호도(성별, 나이 등)를 반영한 동적 매칭 알고리즘을 구현했습니다. 랜덤으로 매칭된 상대와 계속 연락을 이어가고 싶을 수도, 그렇지 않을 수도 있다는 점에 착안하여 상호 친구 수락(ACCEPTED) 상태일 때만 채팅을 지속할 수 있는 'Chat Lock' 로직을 도입했습니다. 이를 통해 사용자가 상대와의 연락 지속 여부를 직접 선택할 수 있도록 했습니다.",
       images: ["/images/Chatzar/Chatzar_matching.png", "/images/Chatzar/Chatzar_matching_detail.png", "/images/Chatzar/Chatzar_isMatching.png"]
     },
     {
-      title: "관계 기반 보안 가드 (Chat Lock)",
-      desc: "상호 친구 수락(ACCEPTED) 상태가 아닐 경우 메시지 발신을 제한하여 스팸 및 개인정보 노출 방지.",
+      title: "관계 기반 Chat Lock",
+      desc: "친구 요청을 수락하면 대화를 계속 이어갈 수 있고, 거절하거나 응답하지 않으면 더 이상 메시지를 주고받을 수 없도록 제한하여, 랜덤 매칭 이후 관계 지속 여부에 대한 선택권을 사용자에게 제공합니다.",
       images: ["/images/Chatzar/Chatzar_isNotFriend.png", "/images/Chatzar/Chatzar_friend_request.png"]
     }
   ],

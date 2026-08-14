@@ -7,7 +7,9 @@
       "Bash(npx tsc *)",
       "Bash(git *)",
       "PowerShell(Get-ChildItem *)",
-      "PowerShell(git *)"
+      "PowerShell(git *)",
+      "Bash(npm run *)",
+      "Bash(npx gh-pages *)"
     ]
   }
 }
