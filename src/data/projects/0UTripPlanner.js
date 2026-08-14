@@ -2,6 +2,8 @@ export const oUTripPlanner = {
   id: "outripplanner",
   title: "0U Trip Planner",
   subtitle: "Full-stack 여행 플랫폼",
+  period: "2023.07. - 2026.05.",
+  role: "풀스택 개발 / 팀 프로젝트(2 인) -> 개인 고도화",
   tech: ["Node.js", "Express", "MySQL", "React.js", "Kakao Maps API", "Passport.js"],
   description: "여행 계획을 생성하고 공유할 수 있는 웹 플랫폼. Kakao Map API를 연동한 실시간 장소 검색 및 시각화.",
   fullDescription: "0U Trip Planner는 나만의 여행 일정을 상세히 기록하고, 타인과 공유하며 소통할 수 있는 풀스택 웹 서비스입니다. 단순한 정보 기록을 넘어 공유(Share) 및 가져오기(Import) 로직을 통해 사용자 간 인터랙션을 극대화했으며, Kakao Map API를 깊이 있게 커스터마이징하여 실시간 장소 검색 및 시각화 기능을 구현했습니다.",
@@ -9,7 +11,7 @@ export const oUTripPlanner = {
   features: [
     {
       title: "플래너 공유 게시판 & 소셜 기능",
-      desc: "isShared 플래그 토글 하나로 내 플래너를 공개 게시판에 등록하거나 비공개로 전환하는 상태 제어 로직을 구현했습니다. 게시판에서는 좋아요(likes 컬럼 증감)와 북마크(isMarked 상태 관리)를 지원하며, 마음에 드는 타인의 플래너를 '가져오기(Import)'하면 Plan과 연관된 DayPlace 데이터를 새 사용자 소유로 Deep Copy하여 독립적으로 편집할 수 있도록 설계했습니다.",
+      desc: "isShared 플래그 토글 하나로 내 플래너를 공개 게시판에 등록하거나 비공개로 전환하는 상태 제어 로직을 구현했습니다. 게시판에서는 좋아요(likes 컬럼 증감)와 북마크(isMarked 상태 관리)를 지원하며, 마음에 드는 타인의 플래너를 '가져오기(Import)'하면 Plan 메타데이터를 새 사용자 소유로 복사하여 내 보관함에서 독립적으로 관리할 수 있도록 설계했습니다.",
       images: ["/images/0UTripPlanner/plan_list.png", "/images/0UTripPlanner/plan_share.png", "/images/0UTripPlanner/plan_create.png", "/images/0UTripPlanner/plan_detail.png"]
     },
     {
@@ -28,15 +30,15 @@ export const oUTripPlanner = {
     },
     {
       title: "관계형 데이터베이스 설계 및 최적화",
-      desc: "MySQL 환경에서 User와 Plan 테이블 간의 1:N 관계를 설정하고, Sequelize의 Eager Loading(Include)을 활용하여 쿼리 횟수를 줄이면서도 작성자 정보를 효율적으로 결합했습니다. 이를 통해 공유 게시판에서 각 플래너의 소유주 정보를 실시간으로 렌더링합니다."
+      desc: "MySQL 환경에서 User(1) — Plan(N) — DayPlace(N) 계층 관계를 설계하고, Sequelize Eager Loading으로 공유 게시판 조회 시 Plan·User·DayPlace 3개 테이블을 1쿼리(JOIN)로 처리했습니다. 플래너 N개 기준 기존 N+1 쿼리 구조 대비 최대 91% 쿼리 감소 효과를 달성했습니다."
     }
   ],
   troubleshooting: [
     {
       title: "Sequelize Eager Loading을 통한 N+1 문제 해결",
-      problem: "여행 일정 조회 시 연관 DayPlace 개수만큼 추가 SELECT 쿼리 발생으로 API 응답 시간 저하",
-      cause: "ORM 기본 Lazy Loading으로 메인 데이터 조회 후 연관 데이터를 개별 호출하는 비효율적 쿼리 구조",
-      solution: "include 옵션(Eager Loading)으로 JOIN 단일 쿼리로 개선하여 응답 시간 단축"
+      problem: "여행 일정 조회 시 플래너 개수만큼 추가 SELECT 쿼리 발생으로 API 응답 저하 (플래너 10개 기준 11쿼리 실행)",
+      cause: "ORM 기본 Lazy Loading으로 Plan 목록 조회(1회) 후 각 Plan의 DayPlace를 개별 호출(N회)하는 N+1 구조",
+      solution: "include 옵션(Eager Loading)으로 LEFT JOIN 단일 쿼리로 개선 — 플래너 10개 기준 11쿼리 → 1쿼리로 약 91% 감소"
     },
     {
       title: "CORS + 세션 쿠키 미전송 문제",

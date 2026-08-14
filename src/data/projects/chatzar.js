@@ -8,7 +8,7 @@ export const Chatzar = {
   features: [
     {
       title: "실시간 메시징 및 가용성 확보",
-      desc: "WebSocket과 STOMP 프로토콜을 활용하여 전이중(Full-duplex) 통신 환경을 구축했습니다. 메시지 브로커를 통해 수만 명의 동시 접속자를 처리할 수 있는 인프라를 설계하였으며, ChannelInterceptor를 사용하여 연결 세션별 실시간 인증 및 권한 검증 로직을 구현했습니다.",
+      desc: "WebSocket과 STOMP 프로토콜을 활용하여 전이중(Full-duplex) 통신 환경을 구축했습니다. 메시지 브로커를 적용해 연결 수에 비례해 수평 확장이 가능한 구조로 설계하였으며, ChannelInterceptor를 사용하여 연결 세션별 실시간 인증 및 권한 검증 로직을 구현했습니다.",
       image: "/images/Chatzar/Chatzar_chatting.png"
     },
     {
@@ -28,6 +28,10 @@ export const Chatzar = {
     }
   ],
   troubleshooting: [
+    {
+      title: "JUnit5 통합 테스트 26개 작성 (8개 서비스 클래스)",
+      content: "AuthService, FriendshipService, MatchService 등 핵심 비즈니스 로직 전반에 걸쳐 @SpringBootTest 기반 실제 DB 연동 통합 테스트 26개를 작성했습니다. FriendshipService 6개(친구 요청 수락/거절/중복/자기 자신 요청 등), MatchService 4개(매칭 성공/대기/취소/상태 조회), AuthService 관련 6개(로그인 실패·로그아웃·토큰 재발급 등) 등 실제 동작 시나리오를 검증했습니다."
+    },
     {
       title: "보안 사각지대 해소",
       problem: "WebSocket 연결 시 서버가 403을 반환하며 핸드쉐이크 자체가 실패",
