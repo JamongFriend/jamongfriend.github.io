@@ -35,10 +35,10 @@ export const oUTripPlanner = {
   ],
   troubleshooting: [
     {
-      title: "Sequelize Eager Loading을 통한 N+1 문제 해결",
-      problem: "여행 일정 조회 시 플래너 개수만큼 추가 SELECT 쿼리 발생으로 API 응답 저하 (플래너 10개 기준 11쿼리 실행)",
-      cause: "ORM 기본 Lazy Loading으로 Plan 목록 조회(1회) 후 각 Plan의 DayPlace를 개별 호출(N회)하는 N+1 구조",
-      solution: "include 옵션(Eager Loading)으로 LEFT JOIN 단일 쿼리로 개선 — 플래너 10개 기준 11쿼리 → 1쿼리로 약 91% 감소"
+      title: "중복 DB 조회 제거로 추천 API 쿼리 수 감소",
+      problem: "추천 장소 조회 API가 장소/숙소/식당 데이터를 가져오기 위해 동일 테이블(Suggest)을 속성별로 3회 분리 조회",
+      cause: "장소/호텔/식당 각각을 위한 별도 findAll 쿼리를 작성해, 사실상 같은 테이블을 attributes만 다르게 3번 SELECT하는 구조",
+      solution: "Suggest.findAll()을 1회만 호출한 뒤 메모리에서 filter/map으로 장소·호텔·식당을 분기 처리 — DB 왕복 3회 → 1회로 축소"  
     },
     {
       title: "CORS + 세션 쿠키 미전송 문제",
